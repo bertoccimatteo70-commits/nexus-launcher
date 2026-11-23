@@ -24,13 +24,12 @@ jobs:
           set -euo pipefail
           test -f bootstrap/READY
           curl -fsSL --retry 3 --retry-delay 2 --max-time 120 \
-            "https://files.catbox.moe/hga53c.xz" \
+            "https://files.catbox.moe/nn72tz.xz" \
             -o /tmp/nexus-source.tar.xz
-          echo "09457057dfdd994eba3697837c99a64950d73d0e18ac8afa882541cc3b0a7df6  /tmp/nexus-source.tar.xz" | sha256sum -c -
+          echo "db7a0f075d6f0641833dc263f80a44ed1a3a101becac8b6d25bc07426096e437  /tmp/nexus-source.tar.xz" | sha256sum -c -
           tar -xJf /tmp/nexus-source.tar.xz -C .
           chmod +x gradlew scripts/*.sh
           rm -rf bootstrap
-          rm -f .github/workflows/import-source.yml
 
       - name: Commit complete project
         run: |
