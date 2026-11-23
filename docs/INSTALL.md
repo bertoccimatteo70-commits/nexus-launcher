@@ -12,7 +12,7 @@
 SHA-256:
 
 ```
-b5087d773f7f95993fa96f6b0a32c956cde51e7ae62f488f98822b4fcdda5ccf  NexusLauncher-1.0.0-release.apk
+cd1eed822077f8062a87a59deaa1db94f40b903112531fc8eb7e5e227e0f5eac  NexusLauncher-1.0.0-release.apk
 ```
 
 ```bash
@@ -28,8 +28,8 @@ Verifica con Android SDK build-tools:
 apksigner verify --verbose --print-certs NexusLauncher-1.0.0-release.apk
 ```
 
-L'APK **non** è un APK debug: la build locale è stata eseguita con `assembleRelease`,
-firmata con la configurazione di release e verificata con `apksigner`.
+L'APK **non** è un APK debug: la release è stata ricostruita e firmata dalla pipeline
+GitHub Actions con `assembleRelease` e verificata con `apksigner`.
 
 ## Installazione
 

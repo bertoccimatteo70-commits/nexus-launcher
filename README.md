@@ -144,7 +144,7 @@ keyPassword=...
 La pipeline GitHub Actions ricostruisce il keystore dai secret:
 `SIGNING_KEY_BASE64`, `SIGNING_STORE_PASSWORD`, `SIGNING_KEY_ALIAS`,
 `SIGNING_KEY_PASSWORD`. Il workflow verifica la firma con `apksigner`, calcola
-`SHA256SUMS` e pubblica APK + checksum nella release del tag `v*`.
+il file `.sha256` e pubblica APK + checksum nella release del tag `v*`.
 
 ### Build riproducibile
 
@@ -155,13 +155,15 @@ Dettagli e limiti in [docs/TESTING.md](docs/TESTING.md).
 
 ## Test
 
-- **30 test unitari JVM**: 30 passati, 0 fallimenti (`:core:common:test`).
-- **4 test UI Compose** compilati (`:app:assembleDebugAndroidTest`); richiedono un
-  emulatore/dispositivo per l'esecuzione.
+- **30 test unitari JVM**: 30 passati, 0 fallimenti (`:core:common:test`), anche in CI.
+- **4 test UI Compose** compilati (`:app:assembleDebugAndroidTest`); l'esecuzione in CI
+  è stata tentata due volte su API 31, ma il job è fallito con
+  `Timeout waiting for emulator to boot.` (600 s e 1200 s). I test UI **non sono stati
+  eseguiti** e non sono da considerare superati.
 - Build Release firmata verificata con `apksigner` (schema v2).
-- Nessun dispositivo fisico o emulatore era disponibile in questo ambiente: i flussi
-  runtime (installazione, ruolo Home, permessi, LAN a due dispositivi, TalkBack) non
-  sono stati eseguiti qui. La pipeline include un job strumentato API 31.
+- Nessun dispositivo fisico era disponibile: installazione, ruolo Home, permessi,
+  LAN a due dispositivi, TalkBack e prestazioni non sono stati verificati su hardware.
+  La pipeline include il job strumentato, ma il runner GitHub non ha avviato l'emulatore.
 
 Comandi, risultati e limiti completi: [docs/TESTING.md](docs/TESTING.md).
 

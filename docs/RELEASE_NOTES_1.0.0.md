@@ -40,18 +40,22 @@ di sviluppo è documentata in [TESTING.md](TESTING.md).
 
 ## Correzioni e qualità
 
-- 30 test unitari JVM verdi.
-- 4 test UI Compose compilati; esecuzione strumentata prevista in CI su emulatore API 31.
-- Build Debug, test APK e Release completate nell'ambiente di build.
+- 30 test unitari JVM verdi, anche nella CI GitHub Actions.
+- 4 test UI Compose compilati; l'esecuzione strumentata in CI è stata tentata due volte
+  su API 31 ed è fallita per `Timeout waiting for emulator to boot.` (600 s e 1200 s).
+  I test UI non sono stati eseguiti.
+- Build Debug, test APK e Release completate nell'ambiente di build e nella CI.
 - Firma verificata con `apksigner`.
 - Contenuto APK riproducibile tra rebuild (118/118 entry ZIP identiche); la firma APK
   può differire a livello di blocco di firma.
 
 ## Limitazioni note
 
-- Nessun test su dispositivo fisico o emulatore in questo ambiente: installazione,
-  ruolo Home, permessi runtime, TalkBack e LAN a due dispositivi non sono stati
-  eseguiti qui. Il job CI strumentato è pronto.
+- Nessun test su dispositivo fisico: installazione, ruolo Home, permessi runtime,
+  TalkBack e LAN a due dispositivi non sono stati eseguiti. Il job CI strumentato è
+  stato eseguito due volte, ma il runner GitHub non ha completato il boot
+  dell'emulatore (`Timeout waiting for emulator to boot.`), quindi i test UI non sono
+  stati eseguiti.
 - Statistiche d'uso limitate agli avvii tramite Nexus.
 - Badge dipendenti dall'accesso Notification Listener.
 - Allarmi automazioni inexact (Doze può ritardarli; il tema si ricalcola all'apertura).

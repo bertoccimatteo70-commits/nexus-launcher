@@ -21,8 +21,8 @@ Legenda verificabilità:
 | Architettura modulare | 12 moduli Gradle; compilati |
 | APK ≤ 200 MB | 21.445.955 byte |
 | APK Release firmato | Firma v2 RSA 4096 verificata con `apksigner` |
-| Build CI | Workflow GitHub Actions incluso (build, unit, UI, release) |
-| Test automatici | 30 unitari verdi; 4 UI compilati, non eseguiti qui |
+| Build CI | Workflow GitHub Actions: build/unit/release verdi; job UI bloccato dal timeout dell'emulatore |
+| Test automatici | 30 unitari verdi; 4 UI compilati, non eseguiti (timeout emulatore CI) |
 
 ## Home
 
@@ -160,8 +160,8 @@ device.**
 
 Controllo GitHub Stable/Beta, note release, versione, link download; nessuna installazione
 silenziosa. Controllo automatico al massimo una volta ogni 24 ore, più controllo manuale.
-**Compilato, non eseguito contro una release reale in questo ambiente.** Il repository
-deve ancora pubblicare la release 1.0.0 perché il controllo la rilevi.
+**Compilato; la release 1.0.0 è pubblicata, ma il controllo in-app non è stato eseguito
+su un dispositivo.**
 
 ## Diagnostica e stabilità
 
@@ -171,7 +171,9 @@ verificare un crash reale su device.**
 
 ## Non completato / non verificato
 
-1. **Verifica runtime su Android 12+**: nessun dispositivo/emulatore disponibile qui.
+1. **Verifica runtime su Android 12+**: nessun dispositivo disponibile; il job CI
+   strumentato è fallito per timeout di avvio dell'emulatore, quindi i 4 test UI non
+   sono stati eseguiti.
 2. **Test LAN reale tra due dispositivi**: solo protocollo su stream JVM.
 3. **TalkBack e accessibilità sul campo**: etichette presenti, nessun audit su device.
 4. **Benchmark su 2 GB**: nessuna misura di FPS/memoria su hardware reale.
